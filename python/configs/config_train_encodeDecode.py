@@ -10,8 +10,8 @@ config_dict = {
     'config_class_file': 'dict_configs/config_class_encodeDecode.py',
     'input_types'       : ['img_crop','extrinsic_rot','extrinsic_rot_inv','bg_crop'],
     'output_types'      : ['3D','img_crop'],
-    'label_types_train' : ['img_crop','3D','bounding_box_cam','intrinsic_crop','extrinsic_rot','extrinsic_rot_inv'], #'3D',
-    'label_types_test'  : ['img_crop','3D','bounding_box_cam','intrinsic_crop','extrinsic_rot','extrinsic_rot_inv'], #'3D',
+    'label_types_train' : ['img_crop','3D','bounding_box_cam','intrinsic_crop','extrinsic_rot','extrinsic_rot_inv'],
+    'label_types_test'  : ['img_crop','3D','bounding_box_cam','intrinsic_crop','extrinsic_rot','extrinsic_rot_inv'],
     'num_workers'       : 8,
     
     # problem class parameters
@@ -36,12 +36,14 @@ config_dict = {
     'train_crop_relative' : False,
 
     # dataset
+    'dataset_folder_train' : '/cvlabdata1/home/rhodin/code/humanposeannotation/python/pytorch_human_reconstruction/TMP/H36M-MultiView-train',
+    'dataset_folder_test' : '/cvlabdata1/home/rhodin/code/humanposeannotation/python/pytorch_human_reconstruction/TMP/H36M-MultiView-test',
+    #'dataset_folder' :'/Users/rhodin/H36M-MultiView-test',
     'training_set' : 'h36m',
     'img_mean' : (0.485, 0.456, 0.406),
     'img_std' : (0.229, 0.224, 0.225),
     'actor_subset' : [1,5,6,7,8], # all training subjects
-    'actor_subset_3Dpose' : [1,9,11],
-    'active_cameras' : False, 
+    'active_cameras' : False,
     'inputDimension' : inputDimension,
     'mirror_augmentation' : False,
     'perspectiveCorrection' : True,
@@ -50,12 +52,12 @@ config_dict = {
     'scale_augmentation' : False,
     'seam_scaling' : 1.0,
     'useCamBatches' : 4,
-    'every_nth_frame' : 1,
+    'useSubjectBatches' : True,
+    'every_nth_frame' : 100,
     
     'note' : 'resL3',
 
     # encode decode
-    'useSubjectBatches' : 2,
     'latent_bg' : 0,
     'latent_fg' : 24,
     'latent_3d' : 200*3,
@@ -75,7 +77,6 @@ config_dict = {
     'implicit_rotation' : False,
     'predict_rotation' : False,
     'skip_background' : True,
-    
 }
 
 # learning rate influence
@@ -121,7 +122,7 @@ if 1:
     config_dict['MAE'] = True
 
 # smaller unsupervised subsets
-if 0:
+if 1:
     config_dict['actor_subset'] = [1,5,6,7,8]
     #config_dict['actor_subset'] = [1,5,6]
-    #config_dict['actor_subset'] = [1,5]
+    config_dict['actor_subset'] = [1]
